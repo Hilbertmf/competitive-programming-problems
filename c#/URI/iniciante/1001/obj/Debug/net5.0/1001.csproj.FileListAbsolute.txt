@@ -1,0 +1,16 @@
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.exe
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.deps.json
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.runtimeconfig.json
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.runtimeconfig.dev.json
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.dll
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\ref\1001.dll
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\bin\Debug\net5.0\1001.pdb
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.csprojAssemblyReference.cache
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.GeneratedMSBuildEditorConfig.editorconfig
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.AssemblyInfoInputs.cache
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.AssemblyInfo.cs
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.csproj.CoreCompileInputs.cache
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.dll
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\ref\1001.dll
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.pdb
+C:\workspace\competitive-programming\c#\URI\iniciante\1001\obj\Debug\net5.0\1001.genruntimeconfig.cache

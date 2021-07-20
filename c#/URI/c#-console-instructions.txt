@@ -1,0 +1,9 @@
+to create new c# console app:
+open terminal and enter:
+dotnet new console
+
+to run c# console app:
+enter:
+dotnet run
+
+for each new app you need a new folder
