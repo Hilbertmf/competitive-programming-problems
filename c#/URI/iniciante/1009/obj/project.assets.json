@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1009\\1009.csproj",
+      "projectUniqueName": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1009\\1009.csproj",
       "projectName": "1009",
-      "projectPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1009\\1009.csproj",
+      "projectPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1009\\1009.csproj",
       "packagesPath": "C:\\Users\\hilbe\\.nuget\\packages\\",
-      "outputPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1009\\obj\\",
+      "outputPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1009\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hilbe\\AppData\\Roaming\\NuGet\\NuGet.Config",

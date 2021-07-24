@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1008\\1008.csproj": {}
+    "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1008\\1008.csproj": {}
   },
   "projects": {
-    "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1008\\1008.csproj": {
+    "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1008\\1008.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1008\\1008.csproj",
+        "projectUniqueName": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1008\\1008.csproj",
         "projectName": "1008",
-        "projectPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1008\\1008.csproj",
+        "projectPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1008\\1008.csproj",
         "packagesPath": "C:\\Users\\hilbe\\.nuget\\packages\\",
-        "outputPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1008\\obj\\",
+        "outputPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1008\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hilbe\\AppData\\Roaming\\NuGet\\NuGet.Config",

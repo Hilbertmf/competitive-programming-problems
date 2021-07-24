@@ -1,0 +1,16 @@
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.exe
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.deps.json
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.runtimeconfig.json
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.runtimeconfig.dev.json
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.dll
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\ref\1014.dll
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\bin\Debug\net5.0\1014.pdb
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.csprojAssemblyReference.cache
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.GeneratedMSBuildEditorConfig.editorconfig
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.AssemblyInfoInputs.cache
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.AssemblyInfo.cs
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.csproj.CoreCompileInputs.cache
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.dll
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\ref\1014.dll
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.pdb
+C:\workspace\competitive-programming-problems\c#\URI\iniciante\1014\obj\Debug\net5.0\1014.genruntimeconfig.cache

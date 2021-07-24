@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1011\\1011.csproj": {}
+    "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1011\\1011.csproj": {}
   },
   "projects": {
-    "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1011\\1011.csproj": {
+    "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1011\\1011.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1011\\1011.csproj",
+        "projectUniqueName": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1011\\1011.csproj",
         "projectName": "1011",
-        "projectPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1011\\1011.csproj",
+        "projectPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1011\\1011.csproj",
         "packagesPath": "C:\\Users\\hilbe\\.nuget\\packages\\",
-        "outputPath": "C:\\workspace\\competitive-programming\\c#\\URI\\iniciante\\1011\\obj\\",
+        "outputPath": "C:\\workspace\\competitive-programming-problems\\c#\\URI\\iniciante\\1011\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hilbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
