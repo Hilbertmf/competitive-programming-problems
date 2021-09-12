@@ -6,64 +6,80 @@
 using namespace std;
 
 
-// optimal solution
-// Complexity: O(n)
-int subArraysDivisibleByK(int arr[], int k, int num_cards)
+int combinationNChooses2(int n)
 {
-  // auxiliary hash array to count frequency of remainders
-  int aux_mod[k] = {0};
+  return (n * (n-1)) / 2;
+}
 
-  int cumulative_sum = 0;
-  for (int i = 0; i < num_cards; i++)
+void printArray(int arr[], int n)
+{
+  for (int i = 0; i < n; i++)
   {
-    cumulative_sum += arr[i];
-    aux_mod[((cumulative_sum % k) + k) % k]++;
-    // aux_mod[cumulative_sum % k] += 1;
+    printf("%d ",arr[i]);
   }
-
-  int result = 0;
-
-  for (int i = 0; i < k; i++)
-  {
-    if (aux_mod[i] > 1)
-      result += (aux_mod[i] * (aux_mod[i] - 1) ) / 2;
-  }
-
-  result += aux_mod[0];
-  return result;
+  printf("\n");
 }
 
 int main() 
 { 
-	int num_cards, count=0, accumulator;
-  int k = 21;
-  int cards[1000010];
-	scanf("%d", &num_cards);
+	int num_cards;
+  int count = 0;
+  scanf("%d",&num_cards);
+  int cards[num_cards+10] = {0};
+  int prefix_sum[num_cards+10] = {0};
+  int mods[num_cards+10] = {0};
+  int hash[30] = {0};
+  hash[0] = 1;
+  for (int i = 0; i < num_cards; i++)
+  {
+    scanf("%d",&cards[i]);
+    prefix_sum[i] = (i > 0) ? cards[i] + prefix_sum[i-1] : cards[i];
+    mods[i] = prefix_sum[i] % 21;
+  }
+  
+  // printArray(mods, num_cards);
 
   for (int i = 0; i < num_cards; i++)
   {
-    scanf("%d", &cards[i]);
+    hash[mods[i]]++;
+    // printf("log 1 count = %d\n", count);
   }
 
-  // naive solution
-  // Complexity: O(n²)
+  // printf("hash:\n");
+  // printArray(hash, 21);
 
-
-  for (int i = 0; i < num_cards; i++)
+  for (int i = 0; i < 21; i++)
   {
-    if(cards[i] % k == 0)
-      count++;
-    accumulator = cards[i];
-    for (int j = i+1; j < num_cards; j++)
-    {
-      accumulator += cards[j];
-      if(accumulator % k == 0)
-        count++;
+    if(hash[i] >= 2) {
+      count += combinationNChooses2(hash[i]);
+      // printf("log 2 count = %d\n", count);
     }
   }
- 
-	// printf("%d\n", count);
-  printf("%d\n", subArraysDivisibleByK(cards, k, num_cards));
- 
+
+  
+  printf("%d\n",count);
 	return 0; 
 }
+
+// range(i, j)
+// prefix(j) - prefix(i-1)
+
+// mods[j] == mods[i-1] 
+
+// mods [0,0,3,3,3,4,10]
+
+// sort(mods, mods + num_cards);
+  // int equalElements = 1;
+  // for (int i = 0; i < num_cards; i++)
+  // {
+  //   if(mods[i] == 0)
+  //     count++;
+  //   if(mods[i] == mods[i+1] && i < num_cards - 1)
+  //     equalElements++;
+  //   else
+  //   {
+  //     if(equalElements > 1)
+  //       count += combinationNChooses2(equalElements);
+  //     equalElements = 1;
+  //   }
+  // }
