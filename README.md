@@ -38,3 +38,6 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[1641 Queen Bomb](https://neps.academy/competition/941/exercise/1641) - [solution](/neps-academy/queen-bomb.cpp)**
   - **[1646 Tio Number](https://neps.academy/competition/941/exercise/1646) - [solution](/neps-academy/tio-number.cpp)**
   - **[1647 Stacking Specimens Really High](https://neps.academy/competition/941/exercise/1647) - [solution](/neps-academy/stacking-specimens-really-high.cpp)**
+  - **[1683 States from the North](https://neps.academy/exercise/1683) - [solution](/neps-academy/states-from-the-north)**
+  - **[1687 Iccanobif](https://neps.academy/exercise/1687) - [solution](/neps-academy/iccanobif)**
+  - **[1688 Knights Again](https://neps.academy/exercise/1688) - [solution](/neps-academy/knights-again)**
