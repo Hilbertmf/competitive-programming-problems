@@ -31,3 +31,10 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[1087 Queen](https://www.urionlinejudge.com.br/judge/en/problems/view/1087) - [solution](/URI/ad-hoc/1087.cpp)**
 ### UVa
   - **[11172 Relational Operator](https://onlinejudge.org/external/111/11172.pdf) - [solution](/UVa/11172.cpp)**
+### Neps Academy
+  - **[1636 Stacking Specimens](https://neps.academy/exercise/1636) - [solution](/neps-academy/stacking-specimens.cpp)**
+  - **[1638 Fancy Numbers](https://neps.academy/exercise/1637) - [solution](/neps-academy/fancy-numbers.cpp)**
+  - **[1640 Isomorphic Strings](https://neps.academy/competition/941/exercise/1640) - [solution](/neps-academy/isomorphic-strings.cpp)**
+  - **[1641 Queen Bomb](https://neps.academy/competition/941/exercise/1641) - [solution](/neps-academy/queen-bomb.cpp)**
+  - **[1646 Tio Number](https://neps.academy/competition/941/exercise/1646) - [solution](/neps-academy/tio-number.cpp)**
+  - **[1647 Stacking Specimens Really High](https://neps.academy/competition/941/exercise/1647) - [solution](/neps-academy/stacking-specimens-really-high.cpp)**
