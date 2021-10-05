@@ -27,6 +27,7 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[724 Find Pivot Index](https://leetcode.com/problems/find-pivot-index/) - [solution](/leetcode/724-find-pivot-index.cpp)**  
   - **[1528 Shuffle String](https://leetcode.com/problems/shuffle-string/) - [solution](/leetcode/1528-shuffle-string.cpp)**
   - **[1662 Check If Two String Arrays are Equivalent](https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/) - [solution](/leetcode/1662-check-if-two-string-arrays-are-equivalent.cpp)**
+  - **[300 Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) - [solution](/leetcode/300-longest-increasing-subsequence)**
 ### URI
   - **[1087 Queen](https://www.urionlinejudge.com.br/judge/en/problems/view/1087) - [solution](/URI/ad-hoc/1087.cpp)**
 ### UVa
@@ -41,3 +42,5 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[1683 States from the North](https://neps.academy/exercise/1683) - [solution](/neps-academy/states-from-the-north)**
   - **[1687 Iccanobif](https://neps.academy/exercise/1687) - [solution](/neps-academy/iccanobif)**
   - **[1688 Knights Again](https://neps.academy/exercise/1688) - [solution](/neps-academy/knights-again)**
+### OBI
+  - **[Lingua do P](https://olimpiada.ic.unicamp.br/pratique/p2/2014/f1/lingua/) / [URI 2453](https://www.urionlinejudge.com.br/judge/en/problems/view/2453) - [solution](/OBI/lingua-do-p.cpp)**
