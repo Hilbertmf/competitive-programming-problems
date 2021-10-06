@@ -30,6 +30,7 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[1662 Check If Two String Arrays are Equivalent](https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/) - [solution](/leetcode/1662-check-if-two-string-arrays-are-equivalent.cpp)**
 ### URI
   - **[1087 Queen](https://www.urionlinejudge.com.br/judge/en/problems/view/1087) - [solution](/URI/ad-hoc/1087.cpp)**
+  - **[1798 Pipe Cutting](https://www.urionlinejudge.com.br/judge/en/problems/view/1798) - [solution](/URI/dynamic-programming/1798.cpp)**
 ### UVa
   - **[11172 Relational Operator](https://onlinejudge.org/external/111/11172.pdf) - [solution](/UVa/11172.cpp)**
 ### Neps Academy
