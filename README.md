@@ -45,3 +45,5 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
   - **[1688 Knights Again](https://neps.academy/exercise/1688) - [solution](/neps-academy/knights-again.cpp)**
 ### OBI
   - **[Lingua do P](https://olimpiada.ic.unicamp.br/pratique/p2/2014/f1/lingua/) / [URI 2453](https://www.urionlinejudge.com.br/judge/en/problems/view/2453) - [solution](/OBI/lingua-do-p.cpp)**
+
+Inspired by [Luis Filipe's](https://github.com/luisfilipels) Interview-Preparation repository
