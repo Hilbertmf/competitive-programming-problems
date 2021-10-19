@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+
 class Solution {
 public:
   bool isPeak(vector<int>& nums, int pos) {
