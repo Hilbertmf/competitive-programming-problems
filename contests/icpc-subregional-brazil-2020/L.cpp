@@ -21,25 +21,24 @@ void merge(int table[40][40], int wordTable[40][40], int rows, int cols) {
 		{
 		 table[i][j] += wordTable[i][j];
 		}
-		
 	}
-	
 }
 
 bool isAnagram(string word1, string word2) {
 	int length = word1.size();
 	if(word1.size() != word2.size())
 		return false;
-	// int sum1 = 0, sum2 = 0;
-	int asciiTable[256] = {0};
+
+	int asciiTable1[256] = {0};
+	int asciiTable2[256] = {0};
 	for (int i = 0; i < length; i++) {
-		asciiTable[word1[i]]++;
-		asciiTable[word2[i]]++;
+		asciiTable1[word1[i]]++;
+		asciiTable2[word2[i]]++;
 	}
 
 	for (int i = 0; i < 256; i++)
 	{
-		if (asciiTable[i] != 0 && asciiTable[i] != 2)
+		if (asciiTable1[i] != asciiTable2[i])
 			return false;
 	}
 	return true;
@@ -66,22 +65,14 @@ void checkRows(string word, string words[], int noWords, int table[40][40]) {
 			anagram += words[i][j];
 			if(anagram.size() == word.size()) {
 				if(isAnagram(word, anagram)) {
-					// cout << "is anagram!" << endl;
 					int anagramLength = anagram.size();
-					if(noAnagrams == 0) {
-						for (int k = j - (anagramLength - 1); k <= j; k++) {
+					for (int k = j - (anagramLength - 1); k <= j; k++)
 							table[i][k]++;
-						}
-					} else {
-						table[i][j]++;
-					}
 					j = horizontalWindow;
 					horizontalWindow++;
 					noAnagrams++;
 				}
 				else {
-					// cout << "anagram: " << anagram << " word: " << word << endl;
-					// printf("not anagram | window = %d | j = %d\n", horizontalWindow, j);
 					j = horizontalWindow;
 					horizontalWindow++;
 				}
@@ -108,15 +99,11 @@ void checkCols(string word, string words[], int noWords, int table[40][40]) {
 			
 			if (anagram.size() == word.size()) { // we check if its an anagram
 				if(isAnagram(word, anagram)) {
-					// cout << "is anagram!" << endl;
 					int anagramLength = anagram.size();
-					if(noAnagrams == 0) {
-						for (int k = j - (anagramLength - 1); k <= j; k++)
-							table[k][i]++;
-					}
-					else {
-						table[j][i]++;
-					}
+
+					for (int k = j - (anagramLength - 1); k <= j; k++)
+						table[k][i]++;
+
 					j = verticalWindow;
 					verticalWindow++;
 					noAnagrams++;		
@@ -128,9 +115,7 @@ void checkCols(string word, string words[], int noWords, int table[40][40]) {
 				// empty anagram
 				anagram = "";
 			}
-			
 		}
-		
 	}	
 }
 
@@ -151,7 +136,6 @@ void traverseDiagonal(string word, string words[], int table[40][40], int x, int
 			if(anagram.size() == word.size()) {
 				if(isAnagram(word, anagram)) {
 					
-					// cout << "is anagram!" << endl;
 					int anagramLength = anagram.size();
 					
 					for (int w = i - (anagramLength - 1), k = j - (anagramLength - 1);
@@ -165,8 +149,6 @@ void traverseDiagonal(string word, string words[], int table[40][40], int x, int
 					noAnagrams++;
 				}
 				else {
-					// cout << "anagram: " << anagram << " word: " << word << endl;
-					// printf("not anagram | window = %d | j = %d\n", diagonalWindow, j);
 					j = diagonalWindow;
 					i = diagonalWindow;
 					diagonalWindow++;
@@ -202,8 +184,6 @@ void traverseDiagonal(string word, string words[], int table[40][40], int x, int
 					noAnagrams++;
 				}
 				else {
-					// cout << "anagram: " << anagram << " word: " << word << endl;
-					// printf("not anagram | window = %d | j = %d\n", diagonalWindow, j);
 					j = diagonalWindow;
 					i = diagonalWindow;
 					diagonalWindow++;
@@ -212,10 +192,7 @@ void traverseDiagonal(string word, string words[], int table[40][40], int x, int
 				anagram = "";
 			}
 		}
-
 	}
-
-	
 	return;
 }
 
@@ -229,7 +206,6 @@ void checkDiagonals(string word, string words[], int noWords, int table[40][40])
 		int noAnagrams = 0;
 		for (int j = 0; j < cols; j++) {
 			if(word.find(words[i][j]) != string::npos) { // if current char is inside word
-				// printf("i = %d | j = %d | traversing diagonals...\n", i, j);
 				traverseDiagonal(word, words, table, i, j, rows, cols, "right");
 				traverseDiagonal(word, words, table, i, j, rows, cols, "left");
 			}
@@ -270,7 +246,7 @@ int main()
 	{
 		cin >> wordsInCol[i];
 	}
-	
+
 	int table[40][40];
 	init(table, rows, cols, 0);
 
@@ -282,38 +258,11 @@ int main()
 		checkCols(wordsInCol[i], words, rows, wordTable);
 		checkDiagonals(wordsInCol[i], words, rows, wordTable);
 		normalize(wordTable, rows, cols);
-		// for (int k = 0; k < rows; k++) {
-		// 	for (int w = 0; w < cols; w++) {
-		// 		printf("%d ", wordTable[k][w]);
-		// 	}
-		// printf("\n");	
-		// }
 		merge(table, wordTable, rows, cols);
 	}
 
-	// printf("table no%d:\n", i+1);
-		// for (int i = 0; i < rows; i++) {
-		// 	for (int j = 0; j < cols; j++) {
-		// 		printf("%d ", table[i][j]);
-		// 	}
-		// printf("\n");	
-		// }
-
 	cout << getSpecialCells(table) << endl;
 
-	// checkDiagonals(wordsInCol[0], words, rows, table);
 
-	// for (int i = 0; i < rows; i++) {
-	// 	for (int j = 0; j < cols; j++) {
-	// 		printf("%d ", table[i][j]);
-	// 	}
-	// 	printf("\n");	
-	// }
-
-	
-
-	// cout << noSpecialCells;
-	
- 
 	return 0; 
 }
