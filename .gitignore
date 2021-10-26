@@ -29,6 +29,8 @@ obj/
 
 # Logs and databases #
 ######################
+in.txt
+out.txt
 *.log
 logs
 *.sql
