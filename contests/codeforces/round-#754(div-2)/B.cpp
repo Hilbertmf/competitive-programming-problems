@@ -1,3 +1,5 @@
+// accepted
+// https://codeforces.com/contest/1605/problem/B
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -15,10 +17,7 @@ void initArray(int arr[], int length, int val) {
 } 
  
 int main() { 
-	FASTIO; 
-	//ifstream cin("in.txt"); 
-	//ofstream cout("out.txt"); // cout to file 
-	//freopen("out.txt","w",stdout); // use this one for printf to file 
+	FASTIO;
 
 	int t;
 	std::cin >> t;
@@ -26,43 +25,26 @@ int main() {
 		int length;
 		string str;
 		std::cin >> length;
-		std::cin >> str;	
+		std::cin >> str;
 		string sortedStr = str;
 		sort(sortedStr.begin(), sortedStr.end());
-		int count = 0;
+		// it's either 0 or 1 operation
 		if(str == sortedStr)
 			std::cout << 0 << std::endl;
 		else {
-			vector<set<int>> seqs;
-			while (str != sortedStr) {
-				int j = str.size() - 1;
-				for(int i = 1; i < str.size() && j >= 0; i++) {
-					if(str[i] < str[i-1]) {
-						while (str[j] > str[i-1]) {
-							j--;
-						}
-						char aux;
-						aux = str[j];
-						str[j] = str[i-1];
-						str[i-1] = aux;
-						seqs[count].insert(i);
-						seqs[count].insert(j+1);
-						j--;
-					}
-				}
-				count++;
+			vector<int> indices;
+			for(int i = 0; i < str.size(); i++) {
+				if(str[i] != sortedStr[i])
+					indices.push_back(i+1);
 			}
-			std::cout << count << " ";
-			for(int i = 0; i < count; i++) {
-				std::cout << seqs[i].size() << " ";
-				for(auto it = seqs[i].begin(); it != seqs[i].end(); it++) {
-					std::cout << *it << " ";
-				}
-			}
+			std::cout << 1 << std::endl;
+			std::cout << indices.size();
+
+			for(auto it = indices.begin(); it != indices.end(); it++)
+				std::cout << " " << *it;
+
+			std::cout << std::endl;
 		}
-		// std::cout << sortedStr << std::endl;
 	}
-	 
-	//int objs[num] = {0}; 
 	return 0; 
 }
