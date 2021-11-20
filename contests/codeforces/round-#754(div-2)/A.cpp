@@ -31,34 +31,10 @@ int main() {
 
 		int d = a1 + a3 - 2*(a2);
 		int dev = abs(d);
-		// DEBUG(d);
-		// DEBUG(dev);
 		if(dev % 3 != 0)
 			std::cout << 1 << std::endl;
 		else
 			std::cout << 0 << std::endl;
-		// while (dev > 1) {
-		// 	if(d < 0) {
-		// 		a2--;
-		// 		if(a1 < a3)
-		// 			a1++;
-		// 		else
-		// 			a3++;
-		// 	}
-		// 	else {
-		// 		a2++;
-		// 		if(a1 > a3)
-		// 			a1--;
-		// 		else
-		// 			a3--;
-		// 	}
-		// 	d = a1 + a3 - 2*(a2);
-		// 	dev = abs(d);
-		// }
-
-		// std::cout << dev << std::endl;
 	}
-	 
-	//int objs[num] = {0}; 
 	return 0; 
 }
