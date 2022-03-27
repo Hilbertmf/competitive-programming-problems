@@ -23,6 +23,33 @@ int main() {
 	int t;
 	std::cin >> t;
 	while (t--) {
+    std::cout << "t" << std::endl;
+    int numShops, numFriends;
+    std::cin >> numShops >> numFriends;
+    int table[numShops][numFriends];
+    for(int i = 0; i < numShops; i++) {
+      for(int j = 0; j < numFriends; j++) {
+        std::cin >> table[i][j];
+      }
+    }
+    vector<set<int>> friendsCols(numFriends);
+    if(numFriends > numShops) {
+      
+      
+      for(int i = 0; i < numShops; i++) {
+        for(int j = 0; j < numFriends; j++) {
+          friendsCols[j].insert(table[i][j]);
+        }
+      }
+
+      std::cout << "alfa:" << std::endl;
+      int alfa = INF;
+      for(int i = 0; i < numFriends; i++) {
+        // std::cout << "friend " << i << ": " << *friendsCols[i].rbegin() << std::endl;;
+        alfa = min(*friendsCols[i].rbegin(), alfa);
+      }
+      cout << "alfa: " << alfa << "\n";
+    }
   }
   
   return 0;
