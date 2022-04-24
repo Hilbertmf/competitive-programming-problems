@@ -19,13 +19,13 @@ int main() {
 		int len;
 		std::cin >> len;
 		vector<int> vec(len);
-		bool isPossible = true;
 		for(int i = 0; i < len; i++) {
 			std::cin >> vec[i];
 		}
-		int oddParity, evenParity;
-		evenParity = vec[0] % 2;
-		oddParity = vec[1] % 2;
+
+		bool isPossible = true;
+		int evenParity = vec[0] % 2;
+		int oddParity = vec[1] % 2;
 
 		for(int i = 2; i < len && isPossible; i++) {
 			if(i % 2 == 0) {
@@ -46,8 +46,6 @@ int main() {
 		else {
 			std::cout << "no" << std::endl;
 		}
-
 	}	
-	
 	return 0; 
 }
