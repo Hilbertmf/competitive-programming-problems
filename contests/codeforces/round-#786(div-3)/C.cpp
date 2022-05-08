@@ -1,3 +1,5 @@
+// accepted
+// https://codeforces.com/contest/1674/problem/C
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
