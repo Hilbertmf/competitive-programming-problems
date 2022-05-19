@@ -36,8 +36,7 @@ int main() {
 		}
 		DEBUG(sum);
 		int idx = 0;
-		for(int i = 0; i < n; i++, idx++) {
-			nums[idx] = a[i];
+		for(int i = 0; i < n; i++, idx++) {nums[idx] = a[i];
 		}
 		for(int i = 0; i < n; i++, idx++) {
 			nums[idx] = b[i];
