@@ -1,5 +1,5 @@
 // memory exceeded (but i think it gets the right answer)
-// https://m2.codeforces.com/contest/1688/problem/C
+// https://codeforces.com/contest/1688/problem/C
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 

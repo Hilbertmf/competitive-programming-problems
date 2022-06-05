@@ -1,5 +1,5 @@
 // accepted
-// https://m2.codeforces.com/contest/1688/problem/A
+// https://codeforces.com/contest/1688/problem/A
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
