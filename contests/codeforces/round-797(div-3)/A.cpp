@@ -1,5 +1,3 @@
-// accepted
-// https://codeforces.com/contest/1676/problem/H1
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -16,21 +14,25 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int length;
-        cin >> length;
-        vector<int> segments(length);
-        for(int i = 0; i < length; ++i) cin >> segments[i];
+        int numBlocks;
+        cin >> numBlocks;
+        int h1 = ceil(numBlocks / 3.0);
+        int h2 = h1 - 1, h3 = h1 - 2;
 
-        int numCrossings = 0;
-        for(int i = 0; i < length; ++i) {
-            for(int j = i + 1; j < length; ++j) {
-                if(segments[i] >= segments[j])
-                    numCrossings++;
+        // DEBUG(numBlocks);
+        while(h1 + h2 + h3 < numBlocks) {
+            ++h1;
+            h2 = h1 - 1;
+            h3 = numBlocks - (h1 + h2);
+            if(h3 <= 0) {
+                h2--;
+                h3++;
             }
         }
 
-        cout << numCrossings << "\n";
+        cout << h2 << " " << h1 << " " << h3 << "\n";
     }
-
-    return 0;
+    
+    
+    return 0; 
 }
