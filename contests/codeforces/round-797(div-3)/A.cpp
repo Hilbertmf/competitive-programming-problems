@@ -8,7 +8,8 @@ using namespace std;
 #define MEM(arr, val) memset(arr, (val), sizeof(arr)) 
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
 const int MOD = 1000000007; // 10^9 - 7 
- 
+// accepted
+// https://codeforces.com/contest/1690/problem/A
 int main() { 
     FASTIO;
     int t;
