@@ -44,7 +44,7 @@ int main() {
         bool successful = restartWindow(left, k, arr, window);
         if(successful) ans++;
 
-        left++;		
+        left++;
         for(; left < len; ++left) {
             if(arr[left] * 2 > window.back()) {
                 window.pop_front();

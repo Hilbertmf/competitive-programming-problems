@@ -1,5 +1,5 @@
 // accepted
-// https://codeforces.com/contest/1692/problem/B
+// https://codeforces.com/contest/1694/problem/A
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -16,17 +16,22 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        vector<int> arr(n);
-        for(int i = 0; i < n; ++i) {
-            cin >> arr[i];
+        int num0s, num1s;
+        cin >> num0s >> num1s;
+        string res;
+
+        while(num0s || num1s) {
+            if(num1s) {
+                res += '1';
+                num1s--;
+            }
+            if(num0s) {
+                res += '0';
+                num0s--;
+            }
         }
-        unordered_set<int> st(arr.begin(), arr.end());
-        if((n - st.size()) & 1)
-            cout << st.size() - 1 << "\n";
-        else
-            cout << st.size() << "\n";
+
+        cout << res << "\n";
     }	
     
     return 0; 
