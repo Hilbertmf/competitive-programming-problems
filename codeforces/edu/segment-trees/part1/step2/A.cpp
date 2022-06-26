@@ -1,5 +1,3 @@
-// wrong answer
-// https://neps.academy/br/course/estruturas-de-dados-(codcad)/lesson/banco-do-farao
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -8,8 +6,6 @@ using namespace std;
 #define INF (int)INT_MAX
 #define NINF (int)INT_MIN
 #define LONGINF (long long)1e18 
-// #define LONGNINF (long long)LLONG_MIN
-#define LONGNINF (long long)-1e18
 #define MEM(arr, val) memset(arr, (val), sizeof(arr)) 
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
 const int MOD = 1000000007; // 10^9 - 7 
@@ -65,7 +61,7 @@ struct segtree {
         if(ql <= l && qr <= r)
             return sums[node];
         if(l > qr || r < ql)
-            return (data){LONGNINF, LONGNINF, LONGNINF, LONGNINF};
+            return (data){0, 0, 0, 0};
         data result;
         
         int mid = (l + r) / 2;
@@ -73,11 +69,11 @@ struct segtree {
         data right = query(ql, qr, mid+1, r, node);
 
         result.total = left.total + right.total;
-        if(left.total == LONGNINF && right.total == LONGNINF)
-            result.total = LONGNINF;
-        else if(left.total == LONGNINF) 
+        if(left.total == 0 && right.total == 0)
+            result.total = 0;
+        else if(left.total == 0) 
             result.total = right.total;
-        else if(right.total == LONGNINF)
+        else if(right.total == 0)
             result.total = left.total;
         else
             result.total = left.total + right.total;
@@ -95,32 +91,26 @@ struct segtree {
 };
 
 int main() {
-    int t;
-    cin >> t;
-    while(t--) {
-        int n;
-        int num = 0;
-        cin >> n;
-        segtree tree;
-        tree.init(n);
+    int n, m;
+    cin >> n >> m;
+    int num = 0;
+    segtree tree;
+    tree.init(n);
 
-        for(int i = 0; i < n; ++i) {
-            cin >> num;
-            tree.update(i, num);
-        }
-
-        int queries;
-        cin >> queries;
-
-        while(queries--) {
-            int left, right;
-            cin >> left >> right;
-            data res = tree.query(left, right);
-            // cout << res.best << "\n";
-            cout << res.best << endl;
-        }
+    for(int i = 0; i < n; ++i) {
+        cin >> num;
+        tree.update(i, num);
     }
 
+    cout << tree.query(0, n - 1).best << "\n";
+
+    while(m--) {
+        int pos, val;
+        cin >> pos >> val;
+
+        tree.update(pos, val);
+        cout << tree.query(0, n - 1).best << "\n";
+    }
 
     return 0;
 }
