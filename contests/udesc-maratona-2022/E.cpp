@@ -11,7 +11,16 @@ const int MOD = 1000000007; // 10^9 - 7
  
 int main() { 
 	FASTIO;
-	
-	
+	int t;
+	cin >> t;
+	while (t--) {
+		double semesterAvg;
+		cin >> semesterAvg;
+
+		semesterAvg *= 10;
+		double exameScore = (250 - 3*semesterAvg) / 20.0L;
+		printf("%.1lf\n", exameScore);
+	}
+
 	return 0; 
 }

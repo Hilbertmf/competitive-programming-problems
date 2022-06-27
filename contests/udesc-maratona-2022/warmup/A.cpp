@@ -1,4 +1,3 @@
-// TLE
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -10,13 +9,17 @@ using namespace std;
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
 const int MOD = 1000000007; // 10^9 - 7 
 
-long long dfs(int node, vector<list<int>>& graph, vector<bool>& visited) {
+long long dfsOnComplement(int node, vector<set<int>>& graph, set<int>& unvisited) {
+    unvisited.erase(unvisited.find(node));
     long long size = 1;
+    int val = 0;
+    for(auto it = unvisited.begin(); it != unvisited.end();
+    it = unvisited.upper_bound(val)){//we use upperbound because erasing invalidates the iterator
+        val = *it;
 
-    for(auto &neighbor : graph[node]) {
-        if(!visited[neighbor]) {
-            visited[neighbor] = true;
-            size += dfs(neighbor, graph, visited);
+        // is neighbor on complement graph
+        if(graph[node].find(*it) == graph[node].end()) {
+            size += dfsOnComplement(*it, graph, unvisited);
         }
     }
 
@@ -25,71 +28,48 @@ long long dfs(int node, vector<list<int>>& graph, vector<bool>& visited) {
 
 int main() { 
     FASTIO;
-    int n, m, q;
+    int numComputers, numNonConnections, numQueries;
 
-    cin >> n >> m >> q;
+    cin >> numComputers >> numNonConnections >> numQueries;
 
-    vector<list<int>> graph(n);
-    vector<int> computers(q);
-
-    vector<string> nonLinks(m);
-    for(int i = 0; i < m; ++i) {
-        string link, str1, str2;
-        cin >> str1 >> str2;
-        link = str1 + " " + str2;
-        nonLinks[i] = link;
-    }
-    
-    unordered_set<string> nonExistentLinks;
-    nonExistentLinks.reserve(m*2);
-
-    for(auto &link : nonLinks) {
-        nonExistentLinks.insert(link);
-        string rev = link;
-        reverse(rev.begin(), rev.end());
-        nonExistentLinks.insert(rev);
-    }
-
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < n; ++j) {
-            if(i == j) continue;
-
-            string link = to_string(i+1) + " " + to_string(j+1);
-            if(nonExistentLinks.find(link) == nonExistentLinks.end())
-                graph[i].push_back(j);
-        }
-    }
-
+    vector<set<int>> graph(numComputers + 1);
+    set<int> unvisited;
     vector<long long> islandSizes;
-    vector<bool> visited(n);
 
-    for(int i = 0; i < n; ++i) {
-        if(!visited[i]) {
-            visited[i] = true;
-            long long size = dfs(i, graph, visited);
-            islandSizes.push_back(size);
+    for(int i = 1; i <= numComputers; ++i) unvisited.insert(i);
+    
+    int v1, v2;
+
+    for(int i = 0; i < numNonConnections; ++i) {
+        cin >> v1 >> v2;
+        graph[v1].insert(v2);
+        graph[v2].insert(v1);
+    }
+
+    for(int i = 1; i <= numComputers; ++i) {
+        if(unvisited.find(i) != unvisited.end()) {
+            islandSizes.push_back(dfsOnComplement(i, graph, unvisited));
         }
     }
 
     sort(islandSizes.begin(), islandSizes.end(), greater<int>());
 
 
-    for(int i = 1; i < n; ++i) {
+    for(int i = 1; i < islandSizes.size(); ++i) {
         islandSizes[i] += islandSizes[i - 1];
     }
 
-    int computer;
-    for(int i = 0; i < q; ++i) {
-        cin >> computer;
-        if(computer == 0)
+    while(numQueries--) {
+        int computers;
+        cin >> computers;
+        if(computers == 0)
             cout << 0 << "\n";
-        else if(computer >= islandSizes.size())
+        else if(computers >= islandSizes.size())
             cout << islandSizes[islandSizes.size() - 1] << "\n";
         else
-            cout << islandSizes[computer - 1] << "\n";
-    }
-    
+            cout << islandSizes[computers - 1] << "\n";
 
-    
+    }
+
     return 0;
 }
