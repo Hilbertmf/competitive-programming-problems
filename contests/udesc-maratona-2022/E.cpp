@@ -1,3 +1,4 @@
+// accepted
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -10,17 +11,23 @@ using namespace std;
 const int MOD = 1000000007; // 10^9 - 7 
  
 int main() { 
-	FASTIO;
-	int t;
-	cin >> t;
-	while (t--) {
-		double semesterAvg;
-		cin >> semesterAvg;
+    FASTIO;
+    int t;
+    cin >> t;
+    while (t--) {
+        int smAvgInt, smAvgFloat;
+        string s;
+        cin >> s;
+        smAvgInt = stoi(s.substr(0, s.find('.')));
+        smAvgFloat = stoi(s.substr(s.find('.') + 1));
 
-		semesterAvg *= 10;
-		double exameScore = (250 - 3*semesterAvg) / 20.0L;
-		printf("%.1lf\n", exameScore);
-	}
+        double smAvg = smAvgInt*10 + smAvgFloat;
 
-	return 0; 
+        int exameScore_int = 250 - 3*smAvg;
+        exameScore_int >>= 1;
+
+        printf("%.1lf\n", exameScore_int / 10.0);
+    }
+
+    return 0; 
 }

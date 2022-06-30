@@ -1,3 +1,4 @@
+// accepted
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -10,46 +11,46 @@ using namespace std;
 const int MOD = 1000000007; // 10^9 - 7 
  
 int main() { 
-	FASTIO;
-	int numCards;
-	cin >> numCards;
+    FASTIO;
+    int numCards;
+    cin >> numCards;
 
-	vector<pair<char, char>> cards(numCards);
-	char v, t;
-	int rounds = -1;
+    vector<pair<char, char>> cards(numCards);
+    char v, t;
+    int rounds = -1;
 
-	for(int i = 0; i < numCards; ++i) {
-		cin >> v >> t;
-		cards[i] = {v, t};
-	}
+    for(int i = 0; i < numCards; ++i) {
+        cin >> v >> t;
+        cards[i] = {v, t};
+    }
 
-	queue<pair<char, char>> hand;
+    queue<pair<char, char>> hand;
 
-	unordered_map<char, unordered_map<char, int>> cardsInHand;
-	int i;
-	for(i = 0; i < numCards && i < 9; ++i) {
-		hand.push(cards[i]);
-		cardsInHand[cards[i].first][cards[i].second]++;
-		if(cardsInHand[cards[i].first].size() >= 3) {
-			rounds = i + 1;
-			break;
-		}
-	}
+    unordered_map<char, unordered_map<char, int>> cardsInHand;
+    int i;
+    for(i = 0; i < numCards && i < 9; ++i) {
+        hand.push(cards[i]);
+        cardsInHand[cards[i].first][cards[i].second]++;
+        if(cardsInHand[cards[i].first].size() >= 3) {
+            rounds = i + 1;
+            break;
+        }
+    }
 
-	for(i; rounds == -1 && i < cards.size(); ++i) {
-		auto card = hand.front();
-		hand.pop();
-		cardsInHand[card.first][card.second]--;
-		if(cardsInHand[card.first][card.second] <= 0)
-			cardsInHand[card.first].erase(card.second);
+    for(i; rounds == -1 && i < cards.size(); ++i) {
+        auto card = hand.front();
+        hand.pop();
+        cardsInHand[card.first][card.second]--;
+        if(cardsInHand[card.first][card.second] <= 0)
+            cardsInHand[card.first].erase(card.second);
 
-		hand.push(cards[i]);
-		cardsInHand[cards[i].first][cards[i].second]++;
-		if(cardsInHand[cards[i].first].size() >= 3) {
-			rounds = i + 1;
-		}
-	}
+        hand.push(cards[i]);
+        cardsInHand[cards[i].first][cards[i].second]++;
+        if(cardsInHand[cards[i].first].size() >= 3) {
+            rounds = i + 1;
+        }
+    }
 
-	cout << rounds << "\n";
-	return 0; 
+    cout << rounds << "\n";
+    return 0; 
 }
