@@ -1,3 +1,5 @@
+// accepted
+// https://codeforces.com/group/4QT6JKdRZ8/contest/387588/problem/A
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -10,8 +12,17 @@ using namespace std;
 const int MOD = 1000000007; // 10^9 - 7 
  
 int main() { 
-	FASTIO;
-	
-	
-	return 0; 
+    FASTIO;
+    double radius, distance, fuel;
+    cin >> radius >> distance >> fuel;
+
+    double finalDist = radius * acos(1 - (distance * distance) / (2 * radius * radius));
+    bool possible = fuel >= (finalDist * 2);
+    
+    if(possible)
+        cout << "possivel" << "\n";
+    else
+        cout << "impossivel" << "\n";
+    
+    return 0; 
 }

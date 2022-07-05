@@ -11,7 +11,10 @@ const int MOD = 1000000007; // 10^9 - 7
  
 int main() { 
 	FASTIO;
-	
+	int luckyNum;
+	cin >> luckyNum;
+
+
 	
 	return 0; 
 }
