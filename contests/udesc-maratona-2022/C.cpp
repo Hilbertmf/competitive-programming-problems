@@ -8,13 +8,54 @@ using namespace std;
 #define MEM(arr, val) memset(arr, (val), sizeof(arr)) 
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
 const int MOD = 1000000007; // 10^9 - 7 
- 
+
+int getPrimes(int n) {
+    vector<bool> isPrime(n+1, true);
+    vector<int> primes;
+    isPrime[0] = false;
+    isPrime[1] = false;
+    
+    for(int i = 2; i*i <= n; ++i) {
+        if(!isPrime[i]) continue;
+        
+        for(int j = i*i; j <= n; j += i) {
+            isPrime[j] = false;
+        }
+    }
+
+    for(int i = 0; i <= n; ++i) {
+        if(isPrime[i]) primes.push_back(i);
+    }
+    
+    return primes.size();
+}
+
+
 int main() { 
 	FASTIO;
-	int luckyNum;
-	cin >> luckyNum;
+	// int luckyNum;
+	// cin >> luckyNum;
+	int n;
+	cin >> n;
+	int ans = getPrimes(n);
+	cout << ans << "\n";
 
 
 	
 	return 0; 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

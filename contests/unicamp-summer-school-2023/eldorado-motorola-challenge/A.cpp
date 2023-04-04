@@ -6,7 +6,6 @@ using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
 #define int long long
 
-
 int32_t main() {
     int n, k;
     cin >> n >> k;
