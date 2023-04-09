@@ -1,3 +1,4 @@
+// https://cses.fi/problemset/task/1194
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -8,180 +9,138 @@ using namespace std;
 #define MEM(arr, val) memset(arr, (val), sizeof(arr)) 
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
 const int MOD = 1000000007; // 10^9 - 7 
+ 
+vector<int> dr {1, -1, 0, 0};
+vector<int> dc {0, 0, 1, -1};
 
-vector<int> dr{1, -1, 0, 0};
-vector<int> dc{0, 0, 1, -1};
-
-bool valid(int row, int col, vector<vector<char>>& grid) {
-    return row >= 0 && col >= 0 && row < grid.size() && col < grid[0].size() &&
-    grid[row][col] != '#';
+bool valid(vector<vector<char>>& grid, int row, int col) {
+	return row >= 0 && col >= 0 && row < grid.size() && col < grid[0].size() &&
+	grid[row][col] != '#';
 }
 
-struct state{
-    int row;
-    int col;
-    int dist;
-    char id;
-};
+void bfs(vector<vector<char>>& grid, unordered_set<string>& exits,
+map<string, int>& exitDist, vector<pair<int, int>>& startNodes,
+pair<int, int> dest, vector<vector<pair<int, int>>>& par) {
+	int n = grid.size();
+	int m = grid[0].size();
+	vector<vector<bool>> vis(n, vector<bool>(m));
+	queue<pair<int, pair<int, int>>> qu;
 
-void addBorder(int r, int c, vector<vector<char>>& grid, unordered_set<string>& borders) {
-    borders.insert(to_string(r) + "," + to_string(c));
+	for(auto &p : startNodes) {
+		qu.push({0, p});
+	}
+
+	while(!qu.empty()) {
+		int dist = qu.front().first;
+		int r = qu.front().second.first;
+		int c = qu.front().second.second;
+		qu.pop();
+
+		if(dest.first != -1 && dest.second != -1) {
+			if(r == dest.first && c == dest.second) break;
+		}
+		else {
+			string str = to_string(r) + "," + to_string(c);
+			if(exits.find(str) != exits.end())
+				exitDist[str] = dist;
+		}
+
+		for(int i = 0; i < 4; ++i) {
+			int nr = r + dr[i];
+			int nc = c + dc[i];
+			if(!valid(grid, nr, nc) || vis[nr][nc]) continue;
+			vis[nr][nc] = true;
+			qu.push({dist + 1, {nr, nc}});
+			if(par.size() > 0)
+				par[nr][nc] = {r, c};
+		}
+	}
+
 }
 
-vector<vector<pair<int, char>>> multisourceBfs(vector<vector<char>>& grid,
-unordered_set<string>& monsters, string source) {
-    vector<vector<pair<int, char>>> dists(grid.size(), vector<pair<int, char>>(grid[0].size(), {INF, '.'}));
-    vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size()));
+string getPath(vector<vector<char>>& grid, vector<vector<pair<int, int>>>& par,
+pair<int, int>& start, pair<int, int>& dest) {
+	string path;
 
-    queue<state> qu;
-    int rowStart = stoi(source.substr(0, source.find(',')));
-    int colStart = stoi(source.substr(source.find(',') + 1));
-    state s = (state){rowStart, colStart, 0, 'S'};
-    qu.push(s);
-    dists[rowStart][colStart] = {0, 'S'};
-    visited[rowStart][colStart] = true;
+	for(pair<int, int> p = start; p != dest; p = par[p.first][p.second]) {
 
-    for(auto &str : monsters) {
-        int r = stoi(str.substr(0, str.find(',')));
-        int c = stoi(str.substr(str.find(',') + 1));
-        qu.push((state){r, c, 0, 'M'});
-        dists[r][c] = {0, 'M'};
-        visited[r][c] = true;
-    }
+		if(par[p.first][p.second].first > p.first) path += 'D';
+		else if(par[p.first][p.second].first < p.first) path += 'U';
+		else if(par[p.first][p.second].second > p.second) path += 'R';
+		else if(par[p.first][p.second].second < p.second) path += 'L';
+	}
+	return path;
+} 
 
-    while (!qu.empty()) {
-        int r = qu.front().row;
-        int c = qu.front().col;
-        int dist = qu.front().dist;
-        char id = qu.front().id;
-        qu.pop();
+string solve(vector<vector<char>>& grid, unordered_set<string>& exits, vector<vector<pair<int, int>>>& par,
+vector<pair<int, int>>& monsters, pair<int, int>& start) {
+	map<string, int> exitToMonster;
+	map<string, int> exitToOrigin;
+	vector<vector<pair<int, int>>> aux;
+	pair<int, int> exitPair = {-1, -1};
 
-        for(int i = 0; i < 4; ++i) {
-            int nr = r + dr[i];
-            int nc = c + dc[i];
-            if(!valid(nr, nc, grid) || visited[nr][nc]) continue;
-            
-            visited[nr][nc] = true;
-            if(dists[nr][nc].first > dist + 1)
-                dists[nr][nc] = {dist + 1, id};
-            qu.push((state){nr, nc, dist + 1, id});
-        }
-    }	
+	bfs(grid, exits, exitToMonster, monsters, {-1, -1}, aux);
+	vector<pair<int, int>> tmp = {start};
+	bfs(grid, exits, exitToOrigin, tmp, {-1, -1}, aux);
 
-    return dists;
-}
+	for(auto &[exit, dist] : exitToOrigin) {
+		if(exitToMonster.find(exit) == exitToMonster.end() ||
+		dist < exitToMonster[exit]) {
+			exitPair = {stoi(exit.substr(0, exit.find(','))),
+			stoi(exit.substr(exit.find(',') + 1))};
+			break;
+		}
+	}
 
-string constructPath(string& source, string& dest, vector<vector<char>>& grid) {
-    int sourceRow = stoi(source.substr(0, source.find(',')));
-    int sourceCol = stoi(source.substr(source.find(',') + 1));
-    int destRow = stoi(dest.substr(0, dest.find(',')));
-    int destCol = stoi(dest.substr(dest.find(',') + 1));
-    vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size()));
-    vector<vector<pair<int, int>>> parents(grid.size(), vector<pair<int, int>>(grid[0].size()));
-    string path;
-    queue<pair<int, int>> qu;
-    visited[sourceRow][sourceCol] = true;
-    qu.push({sourceRow, sourceCol});
-
-    while (!qu.empty()) {
-        int r = qu.front().first;
-        int c = qu.front().second;
-        qu.pop();
-        if(r == destRow && c == destCol)
-            break;
-        
-        for(int i = 0; i < 4; ++i) {
-            int nr  = r + dr[i];
-            int nc  = c + dc[i];
-            if(!valid(nr, nc, grid) || visited[nr][nc]) continue;
-
-            visited[nr][nc] = true;
-            parents[nr][nc] = {r, c};
-            qu.push({nr, nc});
-
-        }		
-    }
-
-    parents[sourceRow][sourceCol] = {-1, -1};
-    int row = destRow;
-    int col = destCol;
-
-    while(row != -1 && col != -1) {
-        int pRow = parents[row][col].first;
-        int pCol = parents[row][col].second;
-
-        
-        if(pRow < row) path += 'D';
-        else if(pRow > row) path += 'U';
-        else if(pCol > col) path += 'L';
-        else if(pCol < col) path += 'R';
-
-        auto p = parents[row][col];
-        row = p.first;
-        col = p.second;
-    }
-
-    reverse(path.begin(), path.end());
-    return path;
+	if(exitPair.first != -1 && exitPair.second != -1) {
+		tmp = {exitPair};
+		map<string, int> tmpMap;
+		bfs(grid, exits, tmpMap, tmp, start, par);
+		string path = getPath(grid, par, start, exitPair);
+		return path;
+	}
+	else {
+		return "";
+	}
 }
 
 int main() { 
-    FASTIO;
-    unordered_set<string> borders;
-    unordered_set<string> monsters;
-    string source;
-    int rows, cols;
-    cin >> rows >> cols;
-    vector<vector<char>> grid(rows, vector<char>(cols));
-    for(int r = 0; r < rows; ++r) {
-        for(int c = 0; c < cols; ++c) {
-            cin >> grid[r][c];
-            if(grid[r][c] == 'M') {
-                monsters.insert(to_string(r) + "," + to_string(c));
-            }
-            else if(grid[r][c] == 'A') {
-                source = to_string(r) + "," + to_string(c);
-            }
-        }
-    }
+	FASTIO;
+	int n, m;
+	cin >> n >> m;
+	vector<vector<char>> grid(n, vector<char>(m));
+	pair<int, int> start;
+	vector<pair<int, int>> monsters;
+	unordered_set<string> exits;
 
-    for(int r = 0; r < rows; ++r) {
+	for(int r = 0; r < n; ++r) {
+		for(int c = 0; c < m; ++c) {
+			cin >> grid[r][c];
+			if(grid[r][c] == 'A') start = {r, c};
+			if(grid[r][c] == 'M') monsters.push_back({r, c});
+			else if((grid[r][c] == '.' || grid[r][c] == 'A') && (
+				r == 0 || r == n - 1 || c == 0 || c == m - 1)) {
+					exits.insert(to_string(r) + "," + to_string(c));
+				}
+		}
+	}
 
-        if(r == 0 || r == rows - 1) {
-            for(int c = 0; c < cols; ++c) {
-                if(grid[r][c] == '.') addBorder(r, c, grid, borders);
-            }
-        }
-        else {
-            if(grid[r][0] == '.') addBorder(r, 0, grid, borders);
-            if(grid[r][cols - 1] == '.') addBorder(r, cols - 1, grid, borders);
-        }
-    }
+	vector<vector<pair<int, int>>> par(n, vector<pair<int, int>>(m, {-1, -1}));	
+	string path = solve(grid, exits, par, monsters, start);
+	
+	string startStr = to_string(start.first) + "," + to_string(start.second);
+	if(exits.find(startStr) != exits.end()) {
+		cout << "YES\n";
+		cout << 0 << "\n";
+	}
+	else if(path.size() == 0) {
+		cout << "NO\n";
+	}
+	else {
+		cout << "YES\n";
+		cout << path.size() << "\n";
+		cout << path << "\n";
+	}
 
-    // multisource bfs from monsters to borders and from borders to source
-    vector<vector<pair<int, char>>> distToPlayer = multisourceBfs(grid, monsters, source);
-    // then compare if theres a border closer to source than any monster mark possible as true
-    bool possible = false;
-    string borderStr;
-    for(auto &str : borders) {
-        int r = stoi(str.substr(0, str.find(',')));
-        int c = stoi(str.substr(str.find(',') + 1));
-        if(distToPlayer[r][c].second == 'S') {
-            possible = true;
-            borderStr = str;
-            break;
-        }
-    }
-
-    if(possible) {
-        cout << "YES" << "\n";
-        cout << borderStr.size() << "\n";
-        string path = constructPath(source, borderStr, grid);
-        cout << path.substr(1) << "\n";
-    }
-    else {
-        cout << "NO" << "\n";
-    }
-
-    return 0; 
+	return 0; 
 }
