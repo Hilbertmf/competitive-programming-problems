@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1194
+// accepted
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
