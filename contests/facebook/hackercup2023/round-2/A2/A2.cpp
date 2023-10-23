@@ -110,8 +110,6 @@ int32_t main() {
             int ans = 0;
             for(auto &[key, val] : score) {
                 ans = max(ans, val);
-                DEBUG(key);
-                DEBUG(val);
             }
             cout << ans << "\n";
         }
