@@ -1,3 +1,5 @@
+// https://codeforces.com/contest/1891/problem/D
+// accepted
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
@@ -11,14 +13,6 @@ using namespace std;
 const long long MOD = 1e9 + 7; // 10^9 + 7 
 
 vector<int> powers_of_2(63);
-
-int PA(int a1, int an, int n) {
-    return (((a1 + an) % MOD) * n) / 2;
-}
-
-int PG(int a1, int q, int n) {
-    return (a1 * (((long long)powl(q, n) - 1) % MOD)) / (q - 1);
-}
 
 int Logn(int x, int b) {
     if(x >= b)
@@ -47,38 +41,16 @@ int32_t main() {
         for(int i = base_l; i < 62 && i <= base_r + 1; ++i) {
             if(i < base_l || i > base_r) continue;
 
-            if(base_l == base_r && base_l == i) {
-                int left_g = Logn(l, i);
-                int right_g = Logn(r, i);
-
-
-                if(left_g == right_g) {
-                    sum += (left_g * ((r - l + 1) % MOD)) % MOD;
-                    sum %= MOD;
-                }
-                else {
-                    
-                    sum += ((((long long)powl(i, (left_g + 1)) - l) % MOD) *
-                    left_g) % MOD;
-                    sum += (((r + 1 - (long long)powl(i, right_g)) % MOD) *
-                    right_g) % MOD;
-                    sum %= MOD;
-                }
-
-            }            
-            else {
-                
                 int x = powers_of_2[i];
                 int y = powers_of_2[i+1] - 1;
 
                 if(base_l == i)
                     x = l;
-                else if(base_r == i)
+                if(base_r == i)
                     y = r;
-                
+
                 int left_g = Logn(x, i);
                 int right_g = Logn(y, i);
-
 
                 if(left_g == right_g) {
                     sum += (left_g * ((y - x + 1) % MOD)) % MOD;
@@ -86,14 +58,13 @@ int32_t main() {
                 }
                 else {
                     int num_elems_left = ((long long)powl(i, (left_g + 1)) - x) % MOD;
-                    int num_elems_right = (y - (long long)powl(i, right_g) + 1) % MOD;
+                    int num_elems_right = (y + 1 - (long long)powl(i, right_g)) % MOD;
                     sum += (left_g * num_elems_left) % MOD;
                     sum += (right_g * num_elems_right) % MOD;
                     sum %= MOD;
 
-                }            
-            }
-            
+                }
+
         }
 
         cout << sum << "\n";
