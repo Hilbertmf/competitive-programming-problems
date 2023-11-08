@@ -1,3 +1,6 @@
+// O(n+m)
+// https://codeforces.com/contest/1894/problem/D
+// accepted
 #include <bits/stdc++.h> 
 using namespace std; 
 #define DEBUG(x) cout << #x << " >>>> " << x << endl 
