@@ -1,6 +1,8 @@
 # Competitive programming problems :technologist::trophy:
 A repo with solutions to programming problems from multiple sites (URI, codeforces, leetcode, atcoder, ICPC etc).<br>
-Number of problems solved: ![CPP Files](https://img.shields.io/badge/cpp_files-0-blue)
+Number of problems solved: <!--- This is a placeholder for the badge. Do not remove or modify this line. -->
+![CPP Files](https://img.shields.io/badge/cpp_files-0-blue)
+
 
 ## Table of Contents
 - [About](#about)
