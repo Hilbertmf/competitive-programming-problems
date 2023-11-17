@@ -29,4 +29,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update badge
-        run: python update_badge.py ${{ needs.count-files.outputs.count }}
+        run: python3 update_badge.py ${{ needs.count-files.outputs.count }}
