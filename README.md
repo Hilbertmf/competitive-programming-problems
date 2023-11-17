@@ -1,7 +1,7 @@
 # Competitive programming problems :technologist::trophy:
 A repo with solutions to programming problems from multiple sites (URI, codeforces, leetcode, atcoder, ICPC etc).<br>
-Number of problems solved: <!--- This is a placeholder for the badge. Do not remove or modify this line. -->
-![CPP Files](https://img.shields.io/badge/cpp_files-0-blue)
+<!--- This is a placeholder for the badge. Do not remove or modify this line. -->
+![CPP Files](https://img.shields.io/badge/Problems_solved-415-green)
 
 
 ## Table of Contents
@@ -49,4 +49,4 @@ I've been using C and C++ for the solutions. Feel free to contact me directly, o
 ### OBI
   - **[Lingua do P](https://olimpiada.ic.unicamp.br/pratique/p2/2014/f1/lingua/) / [URI 2453](https://www.urionlinejudge.com.br/judge/en/problems/view/2453) - [solution](/OBI/lingua-do-p.cpp)**
 
-Inspired by [Luis Filipe's](https://github.com/luisfilipels) Interview-Preparation repository
+Inspired by [Luis Filipe's](https://github.com/luisfilipels) Interview-Preparation repository.
