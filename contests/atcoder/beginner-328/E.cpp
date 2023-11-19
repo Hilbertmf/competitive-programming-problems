@@ -1,4 +1,4 @@
-// O(2^m + C(n,m)*(V+E))
+// O(2^E + C(E,V)*(V+E))
 // https://atcoder.jp/contests/abc328/tasks/abc328_e
 // accepted
 #include <bits/stdc++.h> 
