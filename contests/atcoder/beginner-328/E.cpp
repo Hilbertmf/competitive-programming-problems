@@ -1,17 +1,16 @@
-// O(2^E + C(E,V)*(V+E))
+// O(2^E + C(E,V-1)*(V+E))
 // https://atcoder.jp/contests/abc328/tasks/abc328_e
 // accepted
-#include <bits/stdc++.h> 
-using namespace std; 
-#define DEBUG(x) cout << #x << " >>>> " << x << endl 
-#define MID(l, r) (l + (r - l) / 2) 
-#define CEILDIVISION(x, y) ((x + y - 1) / y) 
-#define INF (int)1e9 
-#define LONGINF (long long)1e18 
-#define MEM(arr, val) memset(arr, (val), sizeof(arr)) 
-#define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0); 
-#define int long long 
-#define MAX 100 
+#include <bits/stdc++.h>
+using namespace std;
+#define DEBUG(x) cout << #x << " >>>> " << x << endl
+#define MID(l, r) (l + (r - l) / 2)
+#define CEILDIVISION(x, y) ((x + y - 1) / y)
+#define INF (int)1e9
+#define LONGINF (long long)1e18
+#define MEM(arr, val) memset(arr, (val), sizeof(arr))
+#define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define int long long
 
 bool hasCycleHelper(int vertex, vector<vector<vector<int>>>& graph, vector<vector<int>>& edges,
 vector<bool>& vis, int color, vector<int>& colors) {
@@ -73,8 +72,7 @@ bool isConnected(vector<vector<vector<int>>>& graph, vector<vector<int>>& edges)
 int explicitEnumeration(int num_edges, vector<vector<vector<int>>>& graph, vector<vector<int>>& edges, int mod) {
     int bit = (1 << num_edges) - 1; // 2 ^ m - 1
     int n = graph.size() - 1;
-    int sum = LONGINF;
-    int aux = 0;
+    int sum = mod;
 
     while(bit >= 1) {
 
@@ -101,32 +99,22 @@ int explicitEnumeration(int num_edges, vector<vector<vector<int>>>& graph, vecto
                 count++;
             }
 
-            if(curr_sum < sum) {
-
-                vector<bool> vis(graph.size());
-                vis[1] = true;
-                bool is_connected = isConnected(graph, edges);
-                bool has_cycle = is_connected && hasCycle(graph, edges);
-
-                if(is_connected && !has_cycle) {
-                    sum = min(sum, curr_sum);
-                    
-                }
+            if(curr_sum < sum && isConnected(graph, edges) && !hasCycle(graph, edges)) {
+                sum = curr_sum;
             }
         }
 
         bit--;
     }
 
-    return sum % mod;
+    return sum;
 }
 
-int32_t main() { 
+int32_t main() {
     FASTIO;
 
     int n, m, k;
     cin >> n >> m >> k;
-
     vector<vector<vector<int>>> graph(n + 1);
     vector<vector<int>> edges;
 
