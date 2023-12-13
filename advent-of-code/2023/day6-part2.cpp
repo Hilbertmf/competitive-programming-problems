@@ -1,4 +1,4 @@
-// O(num_races * race_time)
+// O(1)
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
