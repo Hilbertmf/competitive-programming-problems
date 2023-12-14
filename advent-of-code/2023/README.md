@@ -5,5 +5,5 @@
 - **[Day 4](https://adventofcode.com/2023/day/4) - solutions: [part1](day4-part1.cpp) | [part2](day4-part2.cpp)**
 - **[Day 5](https://adventofcode.com/2023/day/5) - solutions: [part1](day5-part1.cpp) | [part2](day5-part2.cpp)**
 - **[Day 6](https://adventofcode.com/2023/day/6) - solutions: [part1](day6-part1.cpp) | [part2](day6-part2.cpp)**
-- **[Day 6](https://adventofcode.com/2023/day/6) - solutions: [part1](day6-part1.cpp) | [part2](day6-part2.cpp)**
+- **[Day 7](https://adventofcode.com/2023/day/7) - solutions: [part1](day7-part1.cpp) | [part2](day7-part2.cpp)**
 - **[Day 9](https://adventofcode.com/2023/day/9) - solutions: [part1&2](day9-part1&2.cpp)**
