@@ -36,12 +36,9 @@ string removeWhitespace(string& s) {
 
 int getType(string& s) {
     map<char, int> count;
-    int more_common_char = 0;
     vector<int> num_occurences;
     for(char c : s) count[c]++;
-    for(auto &[key, val] : count) {
-        num_occurences.push_back(val);
-    }
+    for(auto &[key, val] : count) num_occurences.push_back(val);
     sort(num_occurences.rbegin(), num_occurences.rend());
     
     // 5/4 of a kind
