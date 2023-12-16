@@ -4,22 +4,13 @@
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
 
-int getNumDotsInterval(vector<int>& prefix_sum, int i1, int i2) {
-    int sum = 0;
-    if(i2 > i1) {
-        if(i1 == 0)
-            sum += prefix_sum[i2];
-        else
-            sum += prefix_sum[i2] - prefix_sum[i1 - 1];
-    }
-    else {
-        if(i2 == 0)
-            sum += prefix_sum[i1];
-        else
-            sum += prefix_sum[i1] - prefix_sum[i2 - 1];
-    }
-
-    return sum;
+int getNumDotsInterval(vector<int>& prefix_sum, int i, int j) {
+    if(i > j) swap(i, j);
+    
+    if(i == 0)
+        return prefix_sum[j];
+    else
+        return prefix_sum[j] - prefix_sum[i - 1];
 }
 
 void initPrefixSum(vector<int>& arr, vector<int>& prefix_sum) {
