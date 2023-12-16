@@ -8,3 +8,4 @@
 - **[Day 7](https://adventofcode.com/2023/day/7) - solutions: [part1](day7-part1.cpp) | [part2](day7-part2.cpp)**
 - **[Day 8](https://adventofcode.com/2023/day/8) - solutions: [part1](day8-part1.cpp) | [part2](day8-part2.cpp)**
 - **[Day 9](https://adventofcode.com/2023/day/9) - solutions: [part1&2](day9-part1&2.cpp)**
+- **[Day 11](https://adventofcode.com/2023/day/11) - solutions: [part1](day11-part1.cpp) | [part2](day11-part2.cpp)**
