@@ -34,7 +34,7 @@ vector<string> rotate90Deg(vector<string>& grid) {
     return res;
 }
 
-bool comp(char lhs, char rhs) {
+bool cmp(char lhs, char rhs) {
     if(lhs != rhs && lhs == 'O')
         return true;
     return false;
@@ -56,7 +56,7 @@ int main() {
         vector<pair<int, int>> intervals = getIntervals(grid_rotated[r], '#');
 
         for(auto &[start, end] : intervals) {
-            sort(grid_rotated[r].begin() + start, grid_rotated[r].begin() + end, comp);
+            sort(grid_rotated[r].begin() + start, grid_rotated[r].begin() + end, cmp);
         }
 
         for(int i = 0, load = grid_rotated[r].size();

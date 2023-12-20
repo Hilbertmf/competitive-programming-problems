@@ -98,24 +98,17 @@ vector<vector<pair<int, int>>>& intervals) {
 }
 
 int main() {
-
-
     
     string line;
     vector<string> grid;
     while (getline(cin, line)) {
         grid.push_back(line);
     }
-
-
     
     vector<string> grid_rotated = rotate90Deg(grid);
     vector<vector<pair<int, int>>> intervals_horizontal = getIntervals(grid, '#');
     vector<vector<pair<int, int>>> intervals_vertical = getIntervals(grid_rotated, '#');
-
-
     set<vector<string>> visited;
-    
     vector<string> curr = grid;
     list<vector<string>> parents;
     int steps = 0;
@@ -145,12 +138,11 @@ int main() {
         ++operations_before_cycle;
     }
 
-    list<vector<string>> cycle(it, parents.end());
-
+    int cycle_sz = parents.size() - operations_before_cycle;
     int num_cycles = 1e9;
     num_cycles -= operations_before_cycle;
 
-    int pos = num_cycles % cycle.size();
+    int pos = num_cycles % cycle_sz;
     advance(it, pos);
     vector<string> final_state = *it;
     grid_rotated = rotate90Deg(final_state);
