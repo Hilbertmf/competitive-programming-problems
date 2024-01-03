@@ -2,6 +2,17 @@ class Solution {
 public:
     const int INF = 1e9;
 
+    void build(vector<vector<int>>& max_in_range, vector<int>& jobs) {
+
+        int n = jobs.size();
+        for(int i = 0; i < n; ++i) {
+            max_in_range[i][i] = jobs[i];
+            for(int j = i + 1; j < n; ++j) {
+                max_in_range[i][j] = max(max_in_range[i][j - 1], jobs[j]);
+            }
+        }
+    }
+
     int getMinDiff(int d, int n, vector<int>& diffs, vector<vector<int>>& dp,
     vector<vector<int>>& max_in_range) {
 
@@ -37,13 +48,7 @@ public:
         int n = jobDifficulty.size();
         vector<vector<int>> dp(d + 1, vector<int>(n + 1, -INF));
         vector<vector<int>> max_in_range(n + 1, vector<int>(n + 1));
-
-        for(int i = 0; i < n; ++i) {
-            max_in_range[i][i] = jobDifficulty[i];
-            for(int j = i + 1; j < n; ++j) {
-                max_in_range[i][j] = *max_element(jobDifficulty.begin() + i, jobDifficulty.begin() + j + 1);
-            }
-        }
+        build(max_in_range, jobDifficulty);
 
         return getMinDiff(d, n, jobDifficulty, dp, max_in_range);
     }
