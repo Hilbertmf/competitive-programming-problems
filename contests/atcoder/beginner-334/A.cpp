@@ -10,15 +10,15 @@ const int MOD = 1e9 + 7; // 10^9 + 7
 
 int32_t main() {
     FASTIO;
-    int t;
-    cin >> t;
-    
-    while(t--){
-
-        
+    int b, g;
+    cin >> b >> g;
 
 
+    if(b > g) {
+        cout << "Bat" << "\n";
     }
-    
+    else {
+        cout << "Glove" << "\n";
+    }    
     return 0;
 }
