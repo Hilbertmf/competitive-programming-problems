@@ -1,8 +1,9 @@
 // https://atcoder.jp/contests/abc368/tasks/abc368_d
 #include <bits/stdc++.h>
-using namespace std;
 #define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-#define int long long
+using namespace std;
+
+unordered_set<int> wanted;
 
 void getDepth(int node, int parent,
 vector<int>& par, vector<vector<int>>& graph,
@@ -65,47 +66,83 @@ vector<vector<int>>& up, vector<vector<int>>& graph) {
     }
 }
 
-int32_t main() {
-    FASTIO;
-
-    int k, n, a, b;
-    cin >> n >> k;
-    vector<int> par(n);
-    vector<vector<int>> graph(n);
-    for (int i = 0; i < n - 1; ++i) {
-        cin >> a >> b;
-        --a; --b;
-        graph[a].push_back(b);
-        graph[b].push_back(a);
-    }
-    
-    vector<int> nodes(k);
-    for (int i = 0; i < k; ++i) {
-        cin >> a;
-        --a;
-        nodes[i] = a;
-    }
-
+int solve_via_lca(int n, vector<vector<int>>& graph) {
     vector<int> depth(n);
     vector<vector<int>> up;
     int LOG;
+    vector<int> par(n);
     binaryLifting(par, LOG, depth, up, graph);    
-    int LCA = nodes[0];
-    for (int i = 1; i < k; ++i) {
-        LCA = lca(LCA, nodes[i], up, LOG, depth);
-    }
-    
-    set<int> vis;
-    for (int i = 0; i < k; ++i) {
-        int cur = nodes[i];
+    int LCA = *wanted.begin();
+    for(int cur : wanted) {
+        LCA = lca(LCA, cur, up, LOG, depth);   
+    }    
+    unordered_set<int> vis;
+    for(int cur : wanted) {
         while (cur != LCA && vis.find(cur) == vis.end()) {
             vis.insert(cur);
             cur = par[cur];
         }
         vis.insert(cur);
     }
+    
     vis.insert(LCA);
+    return vis.size();
+}
 
-    cout << vis.size() << "\n";
+vector<char> hasWantedInSubtree;
+
+bool precompute(int node, int par, vector<vector<int>>& graph) {
+
+    bool hasWanted = wanted.find(node) != wanted.end();
+
+    for(auto &adj : graph[node]) {
+        if (adj == par) continue;
+        hasWanted |= precompute(adj, node, graph);
+    }
+    
+    return hasWantedInSubtree[node] = hasWanted;
+}
+
+void dfs(int node, int par, vector<vector<int>>& graph,
+int& count) {
+
+    count++;
+    for(auto &adj : graph[node]) {
+        if (adj == par) continue;
+        if (hasWantedInSubtree[adj])
+            dfs(adj, node, graph, count);
+    }
+}
+
+int solve_via_dfs(int n, vector<vector<int>> graph) {
+    hasWantedInSubtree.resize(n, false);
+    int root = *wanted.begin();
+    precompute(root, -1, graph);
+    int count = 0;
+    dfs(root, -1, graph, count);
+    return count;
+}
+
+int main() {
+    FASTIO;
+    int n, k, a, b;
+    cin >> n >> k;
+    vector<vector<int>> graph(n);
+
+    for(int i = 0; i < n - 1; ++i) {
+        cin >> a >> b;
+        --a; --b;
+        graph[a].push_back(b);
+        graph[b].push_back(a);
+    }
+
+    for(int i = 0; i < k; ++i) {
+        cin >> a;
+        wanted.insert(--a);
+    }
+
+    cout << solve_via_lca(n, graph) << "\n";
+    // cout << solve_via_dfs(n, graph) << "\n";
+
     return 0;
 }
