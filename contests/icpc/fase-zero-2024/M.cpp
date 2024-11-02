@@ -61,7 +61,6 @@ int32_t main() {
 
     if (ans < 0) ans = 0;
 
-
     cout << ans << " " << ans << "\n";
 
     return 0;

@@ -59,7 +59,5 @@ int32_t main() {
     }
 
     cout << ans.first + 1 << " " << ans.second + 1 << "\n";
-
-
     return 0;
 }

@@ -1,5 +1,3 @@
-// https://codeforces.com/contest/1994/problem/B
-// ac
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
@@ -15,30 +13,52 @@ int32_t main() {
     int t;
     cin >> t;
     
-    while(t--){
+    while(t--) {
 
         int n;
         cin >> n;
-        string s, t;
-        cin >> s >> t;
-        bool equal = s == t;
-        bool possible = true;
-        int last1 = -1;
+        DEBUG(n);
+        bool bobWins = true;
+        vector<int> a(n);
+        vector<int> b(n);
+        vector<char> deleted(n + 1, false);
+        map<int, int> num_to_idx;
+        for(int i = 0; i < n; ++i) cin >> a[i];
+        for(int i = 0; i < n; ++i) cin >> b[i];
 
-        for(int i = 0; i < n && !equal && possible; ++i) {
-            if (s[i] != t[i] && last1 == -1 && s[i] == '0') {
-                possible = false;
+
+        int l = 0, r = n - 1;
+        while (l < r) {
+            // 2 equalities
+            if ((a[l] == b[l] && a[r] == b[r]) ||
+                (a[l] == b[r] && a[r] == b[l])) {
+                if (a[l] != b[l])
+                    swap(b[l], b[r]);
+                l++;
+                deleted[b[l]] = true;
             }
-            if (s[i] == '1')
-                last1 = i;
+            else {
+                DEBUG(n);
+                
+                if (deleted[a[l]] || deleted[a[r]]) {
+                    bobWins = false;
+                    break;
+                }
+
+                deleted[b[l]] = true;
+                ++l;
+            }
         }
 
-        if(s[0] == '1' || possible || equal) {
-            cout << "YES" << "\n";
+        DEBUG(n);
+                
+        if(bobWins) {
+            cout << "Bob\n";
         }
         else {
-            cout << "NO" << "\n";
+            cout << "Alice\n";
         }
-    }    
+    }
+    
     return 0;
 }

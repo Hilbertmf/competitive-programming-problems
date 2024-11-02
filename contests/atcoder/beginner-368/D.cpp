@@ -92,14 +92,12 @@ int solve_via_lca(int n, vector<vector<int>>& graph) {
 vector<char> hasWantedInSubtree;
 
 bool precompute(int node, int par, vector<vector<int>>& graph) {
-
     bool hasWanted = wanted.find(node) != wanted.end();
 
     for(auto &adj : graph[node]) {
         if (adj == par) continue;
         hasWanted |= precompute(adj, node, graph);
     }
-    
     return hasWantedInSubtree[node] = hasWanted;
 }
 
@@ -146,3 +144,224 @@ int main() {
 
     return 0;
 }
+
+
+    void dfs(int v, vector<int> graph[], vector<char>& vis) {
+        vis[v] = true;
+        for(auto &u : graph[v]) {
+            if (vis[u]) continue;
+            dfs(u, graph, vis);
+        }
+    }
+    int countComponents(int n, vector<int> graph[]) {
+        vector<char> vis(n, false);
+        int comp = 0;
+        for(int i = 0; i < n; ++i) {
+            if (!vis[i]) {
+                dfs(i, graph, vis);
+                comp++;
+            }
+        }
+        return comp;
+    }
+
+    int isBridge(int n, vector<int> graph[], int c, int d) {
+        int comp = countComponents(n, graph);
+        // remove edge
+        graph[c].erase(find(graph[c].begin(), graph[c].end(), d));
+        graph[d].erase(find(graph[d].begin(), graph[d].end(), c));
+
+        int new_comp = countComponents(n, graph);
+        return new_comp > comp;
+    }
+
+
+
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+#define FASTIO ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+class UnionFind {
+public:
+    vector<int> parents;
+    vector<int> group_sizes;
+    int num_elems;
+    int num_groups;
+
+    UnionFind(int size) {
+        if (size <= 0) return;
+        num_elems = size;
+        num_groups = size;
+        parents.resize(size);
+        group_sizes.resize(size);
+
+        for(int i = 0; i < size; ++i) {
+            parents[i] = i;
+            group_sizes[i] = 1;
+        }
+    }
+
+    int find(int node) {
+        if (parents[node] == node) return node;
+        return parents[node] = find(parents[node]);
+    }
+    int groupSize(int node) {
+        return group_sizes[find(node)];
+    }
+
+    void join(int node1, int node2) {
+        int root1 = find(node1);
+        int root2 = find(node2);        
+        if (root1 == root2)
+            return;
+        if (root2 > root1)
+            swap(root1, root2);
+        group_sizes[root1] += group_sizes[root2];
+        parents[root2] = root1;
+        num_groups--;
+    }
+    int numComponents() {
+        return num_groups;
+    }
+};
+
+class Solution {
+public:    
+    int removeStones(vector<vector<int>>& stones) {
+        FASTIO;
+        int n = stones.size();
+        // normalize the data
+        vector<int> rows_norm;
+        vector<int> cols_norm;
+        for(auto &stone : stones) {
+           rows_norm.push_back(stone[0]);
+           cols_norm.push_back(stone[1]);
+        }
+        sort(rows_norm.begin(), rows_norm.end());
+        sort(cols_norm.begin(), cols_norm.end());
+        rows_norm.erase(unique(rows_norm.begin(), rows_norm.end()), rows_norm.end());
+        cols_norm.erase(unique(cols_norm.begin(), cols_norm.end()), cols_norm.end());
+        unordered_map<int, int> tab_row;
+        unordered_map<int, int> tab_col;
+        for(int i = 0; i < max(rows_norm.size(), cols_norm.size()); ++i) {
+            if (i < rows_norm.size())
+                tab_row[rows_norm[i]] = i;
+            if (i < cols_norm.size())
+                tab_col[cols_norm[i]] = i;
+        }
+        int rows = rows_norm.size(), cols = cols_norm.size();        
+        vector<vector<int>> norm_stones = stones;
+        for(auto &stone : norm_stones) {
+            stone = {tab_row[stone[0]], tab_col[stone[1]]};
+        }
+
+        UnionFind dsu(rows + cols + n);
+
+        for(int i = 0; i < n; ++i) {
+            int r = norm_stones[i][0];
+            int c = norm_stones[i][1];
+            dsu.join(r, rows + cols + i);
+            dsu.join(rows + c, rows + cols + i);
+        }
+
+        cout << dsu.numComponents() << endl;
+        return n - dsu.numComponents();
+    }
+};
+
+
+class UnionFind {
+public:
+    vector<int> parents;
+    vector<int> group_sizes;
+    int num_elems;
+    int num_groups;
+
+    UnionFind(int size) {
+        if (size <= 0) return;
+        num_elems = size;
+        num_groups = size;
+        parents.resize(size);
+        group_sizes.resize(size);
+
+        for(int i = 0; i < size; ++i) {
+            parents[i] = i;
+            group_sizes[i] = 1;
+        }
+    }
+
+    int find(int node) {
+        if (parents[node] == node) return node;
+        return parents[node] = find(parents[node]);
+    }
+    int groupSize(int node) {
+        return group_sizes[find(node)];
+    }
+
+    void join(int node1, int node2) {
+        int root1 = find(node1);
+        int root2 = find(node2);        
+        if (root1 == root2)
+            return;
+        if (root2 > root1)
+            swap(root1, root2);
+        group_sizes[root1] += group_sizes[root2];
+        parents[root2] = root1;
+        num_groups--;
+    }
+    int numComponents() {
+        return num_groups;
+    }
+};
+
+class Solution {
+public:
+    map<pair<int, int>, int> tab;
+
+    int rowColIdx(int r, int c, int rows, int cols) {
+        return cols * r + c;
+    }
+    
+    int removeStones(vector<vector<int>>& stones) {
+        int n = stones.size();
+        // normalize the data
+        set<int> rows_set;
+        set<int> cols_set;
+        for(auto &stone : stones) {
+           rows_set.insert(stone[0]);
+           cols_set.insert(stone[1]);
+        }
+        unordered_map<int, int> tab_row;
+        unordered_map<int, int> tab_col;
+        int count = 0;
+        int rows = 0, cols = 0;
+        for(int r : rows_set) {
+            tab_row[r] = count;
+            count++;
+        }
+        rows = count;
+        count = 0;
+        for(int c : cols_set) {
+            tab_col[c] = count;
+            count++;
+        }
+        cols = count;
+        
+        vector<vector<int>> norm_stones = stones;
+
+        for(auto &stone : norm_stones) {
+            stone = {tab_row[stone[0]], tab_col[stone[1]]};
+        }
+
+        UnionFind dsu(rows + cols + n);
+
+        for(int i = 0; i < n; ++i) {
+            int r = norm_stones[i][0];
+            int c = norm_stones[i][1];
+            dsu.join(r, rows + cols + i);
+            dsu.join(rows + c, rows + cols + i);
+        }
+
+        cout << dsu.numComponents() << endl;
+        return n - dsu.numComponents();
+    }
+};
