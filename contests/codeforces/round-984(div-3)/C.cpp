@@ -112,8 +112,6 @@ int32_t main() {
                 cout << "NO" << "\n";
             }
         }
-
-
     }
     
     return 0;
