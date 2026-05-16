@@ -1,3 +1,4 @@
+// wrong, probably its a DP problem
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
@@ -24,45 +25,91 @@ int32_t main() {
         ans = a[0];
     }
     else if (n == 2) ans = max(a[0], a[1]);
+    else if (n == 3) {
+        ans = max(a[0] + a[2], a[2]);
+    }
     else {
         
-        unordered_multiset<int> m;
-        if(a[0] > a.back()) {
-            m = unordered_multiset<int>(a.begin(), a.end());
-        }
-        else {
-            m = unordered_multiset<int>(a.rbegin(), a.rend());
+        if (a[0] < a.back())
+            reverse(a.begin(), a.end());
+
+        // edge
+        int i = 1;
+        if (a[0] >= a[1]) {
+            ans += a[0];
+            i = 2;
         }
 
-        if(*m.begin() >= *next(m.begin())) {
-            ans += *m.begin();
-            m.erase(m.begin());
-            m.erase(m.begin());
-        }
-        else {
-            ans += *next(m.begin());
-            m.erase(m.begin());
-            m.erase(m.begin());
-            m.erase(m.begin());
-        }
-        
-        while (!m.empty()) {
-            if (m.size() == 1) {
-                ans += *m.begin();
-                m.clear();
+        for(; i < n - 4; ++i) {
+            ans += max(a[i], a[i + 1]);
+            int possiblity1 = a[i] + a[i + 2];
+            int possiblity2 = a[i + 1];
+            if (possiblity1 > possiblity2) {
+                ans += a[i];
+                i++;
             }
             else {
-                if(*m.begin() < *next(m.begin())) {
-                    ans += *m.begin();
-                }
-                else {
-                    ans += *next(m.begin());
-                } 
-                m.erase(m.begin());
-                m.erase(m.begin());
+                ans += a[i + 1];
+                i += 2;
             }
-            
         }
+
+        int possiblity1 = a[i] + a[i + 2];
+        int possiblity2 = a[i] + a[i + 3];
+        int possiblity3 = a[i + 1] + a[i + 3];
+        ans += max({possiblity1, possiblity2, possiblity3});
+        
+        
+        
+        
+    //     unordered_multiset<int> m;
+    //     if(a[0] > a.back()) {
+    //         m = unordered_multiset<int>(a.begin(), a.end());
+    //     }
+    //     else {
+    //         reverse(a.begin(), a.end());
+    //         cout << "test" << "\n";
+    //         m = unordered_multiset<int>(a.begin(), a.end());
+    //         // for(int i = n - 1; i >= 0; --i) {
+    //         //     m.insert(a[i]);
+    //         // }
+    //         // m = unordered_multiset<int>(a.rbegin(), a.rend());
+    //     }
+
+    //     // print
+    //     for(auto &item : m) {
+    //         DEBUG(item);
+    //     }
+
+    //     if(*m.begin() >= *next(m.begin())) {
+    //         ans += *m.begin();
+    //         m.erase(m.begin());
+    //         m.erase(m.begin());
+    //     }
+    //     else {
+    //         ans += *next(m.begin());
+    //         m.erase(m.begin());
+    //         m.erase(m.begin());
+    //         m.erase(m.begin());
+    //     }
+        
+    //     while (!m.empty()) {
+    //         if (m.size() == 1) {
+    //             ans += *m.begin();
+    //             m.clear();
+    //         }
+    //         else {
+    //             if(*m.begin() < *next(m.begin())) {
+    //                 ans += *m.begin();
+    //             }
+    //             else {
+    //                 ans += *next(m.begin());
+    //             } 
+    //             m.erase(m.begin());
+    //             m.erase(m.begin());
+    //         }
+            
+    //     }
     }
 
     cout << ans << "\n";
