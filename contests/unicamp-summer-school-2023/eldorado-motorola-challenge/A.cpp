@@ -9,7 +9,7 @@ using namespace std;
 int32_t main() {
     int n, k;
     cin >> n >> k;
-    vector<int> a(n);
+    vector<int> a(n), p2(n);
     int in1 = 0;
     int in2 = 0;
     for(int i = 0; i < n; ++i) {

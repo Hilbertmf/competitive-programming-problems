@@ -1,3 +1,5 @@
+// https://codeforces.com/group/FOtuBenVgP/contest/692619
+// https://codeforces.com/group/FOtuBenVgP/contest/692619/problem/C
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
@@ -10,25 +12,16 @@ const int MOD = 1e9 + 7; // 10^9 + 7
 
 int32_t main() {
     FASTIO;
-    int t;
-    cin >> t;
-    set<int> sqrs;
-    map<int, int> mp;
-    for(int i = 0; i * i <= 10000; ++i) {
-        sqrs.insert(i*i);
-        mp[i*i] = i;
+    
+    int n, ans = 0;
+    cin >> n;
+    for(int i = 0; i < n; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if (a + b + c >= 2) ans++;
     }
-    while (t--) {
-        string s;
-        cin >> s;
 
-        int y = stoi(s);
-
-        if (sqrs.find(y) != sqrs.end()) {
-            cout << mp[y] << " " << 0 << "\n";
-        } else cout << -1 << "\n";
-
-    }
+    cout << ans << "\n";
 
     return 0;
 }

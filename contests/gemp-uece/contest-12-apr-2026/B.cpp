@@ -1,3 +1,5 @@
+// AC
+// https://codeforces.com/problemset/problem/677/A
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
@@ -10,25 +12,18 @@ const int MOD = 1e9 + 7; // 10^9 + 7
 
 int32_t main() {
     FASTIO;
-    int t;
-    cin >> t;
-    set<int> sqrs;
-    map<int, int> mp;
-    for(int i = 0; i * i <= 10000; ++i) {
-        sqrs.insert(i*i);
-        mp[i*i] = i;
-    }
-    while (t--) {
-        string s;
-        cin >> s;
+    int n, h;
+    cin >> n >> h;
 
-        int y = stoi(s);
-
-        if (sqrs.find(y) != sqrs.end()) {
-            cout << mp[y] << " " << 0 << "\n";
-        } else cout << -1 << "\n";
-
+    vector<int> a(n);
+    int res = 0;
+    for(int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (a[i] > h) res +=2;
+        else res++;
     }
 
+    cout << res << "\n";
+    
     return 0;
 }
