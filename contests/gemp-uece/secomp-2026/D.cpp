@@ -1,5 +1,6 @@
+// AC
 // https://codeforces.com/group/FOtuBenVgP/contest/692619
-// https://codeforces.com/group/FOtuBenVgP/contest/692619/problem/D
+// https://codeforces.com/problemset/problem/282/A
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
