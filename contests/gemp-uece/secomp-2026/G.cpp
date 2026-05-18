@@ -1,4 +1,3 @@
-// wrong, probably its a DP problem
 #include <bits/stdc++.h>
 using namespace std;
 #define DEBUG(x) cout << #x << " >>>> " << x << endl
@@ -12,108 +11,71 @@ const int MOD = 1e9 + 7; // 10^9 + 7
 int32_t main() {
     FASTIO;
 
-    int n;
+    int n, ans = 0;
     cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; ++i) {
-        cin >> a[i];
+    vector<int> sequence(n);
+    for(auto &num : sequence) {
+        cin >> num;
+    }
+    sort(sequence.begin(), sequence.end());
+
+    map<int, int> occurrences;
+    for(auto num : sequence) {
+        occurrences[num]++;
     }
 
-    int ans = 0;
+    // remove duplicates
+    auto it = unique(sequence.begin(), sequence.end());
+    sequence.erase(it, sequence.end());
+    
+    // remove the isolated nums
+    set<int> isolated;
 
-    if (n == 1) {
-        ans = a[0];
+    if (sequence.size() > 1 && sequence[0] + 1 != sequence[1]) {
+        isolated.insert(sequence[0]);
     }
-    else if (n == 2) ans = max(a[0], a[1]);
-    else if (n == 3) {
-        ans = max(a[0] + a[2], a[2]);
+    if (sequence.size() > 1 && sequence.back() - 1 != sequence[sequence.size() - 2]) {
+        isolated.insert(sequence.back());
     }
-    else {
-        
-        if (a[0] < a.back())
-            reverse(a.begin(), a.end());
+    for(int i = 1; i < sequence.size() - 1; ++i) {
+        if (sequence[i] - 1 != sequence[i - 1] && sequence[i] + 1 != sequence[i + 1])
+            isolated.insert(sequence[i]);
+    }
 
-        // edge
-        int i = 1;
-        if (a[0] >= a[1]) {
-            ans += a[0];
-            i = 2;
+    for(auto num : isolated) {
+        ans += occurrences[num] * num;
+    }
+
+    vector<int> ordered_seq(1);
+    for(auto num : sequence) {
+        if (isolated.find(num) == isolated.end()) // does not contain
+            ordered_seq.push_back(num);
+    }
+
+    // dp-like solution (climbing stairs)
+    int best = 0, prev = 0, prev_prev = 0;
+    for(int i = 1; i < ordered_seq.size(); ++i) {
+        // new ordered sequence
+        if (i > 1 && ordered_seq[i] - 1 != ordered_seq[i - 1]) {
+            // ended dp, new dp
+            ans += max(best, prev);
+            prev = 0;
+            prev_prev = 0;
         }
-
-        for(; i < n - 4; ++i) {
-            ans += max(a[i], a[i + 1]);
-            int possiblity1 = a[i] + a[i + 2];
-            int possiblity2 = a[i + 1];
-            if (possiblity1 > possiblity2) {
-                ans += a[i];
-                i++;
-            }
-            else {
-                ans += a[i + 1];
-                i += 2;
-            }
-        }
-
-        int possiblity1 = a[i] + a[i + 2];
-        int possiblity2 = a[i] + a[i + 3];
-        int possiblity3 = a[i + 1] + a[i + 3];
-        ans += max({possiblity1, possiblity2, possiblity3});
         
-        
-        
-        
-    //     unordered_multiset<int> m;
-    //     if(a[0] > a.back()) {
-    //         m = unordered_multiset<int>(a.begin(), a.end());
-    //     }
-    //     else {
-    //         reverse(a.begin(), a.end());
-    //         cout << "test" << "\n";
-    //         m = unordered_multiset<int>(a.begin(), a.end());
-    //         // for(int i = n - 1; i >= 0; --i) {
-    //         //     m.insert(a[i]);
-    //         // }
-    //         // m = unordered_multiset<int>(a.rbegin(), a.rend());
-    //     }
-
-    //     // print
-    //     for(auto &item : m) {
-    //         DEBUG(item);
-    //     }
-
-    //     if(*m.begin() >= *next(m.begin())) {
-    //         ans += *m.begin();
-    //         m.erase(m.begin());
-    //         m.erase(m.begin());
-    //     }
-    //     else {
-    //         ans += *next(m.begin());
-    //         m.erase(m.begin());
-    //         m.erase(m.begin());
-    //         m.erase(m.begin());
-    //     }
-        
-    //     while (!m.empty()) {
-    //         if (m.size() == 1) {
-    //             ans += *m.begin();
-    //             m.clear();
-    //         }
-    //         else {
-    //             if(*m.begin() < *next(m.begin())) {
-    //                 ans += *m.begin();
-    //             }
-    //             else {
-    //                 ans += *next(m.begin());
-    //             } 
-    //             m.erase(m.begin());
-    //             m.erase(m.begin());
-    //         }
-            
-    //     }
+        int include, exclude, cur = ordered_seq[i];
+        if (i - 2 < 0)
+            include = occurrences[cur] * cur;
+        else
+            include = occurrences[cur] * cur + prev_prev;
+        exclude = prev;
+        best = max(include, exclude);
+        prev_prev = prev;
+        prev = best;
     }
 
+    best = max(best, prev);
+    ans += best;
     cout << ans << "\n";
-
-
     return 0;
 }
